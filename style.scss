@@ -1,0 +1,48 @@
+@import "./styles/base.scss";
+
+:root {
+  --duration: 1s;
+  --easing: cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  padding: 5vmin;
+  background-color: #f4f4f4;
+}
+
+a {
+  color: blue;
+}
+
+h1 {
+  margin: 0;
+}
+
+small {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+ul {
+  margin: 1rem 0;
+}
+
+.ball {
+  height: 5vmin;
+  width: 5vmin;
+  margin-inline: auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
+  transition-property: transform, opacity;
+  transition-timing-function: ease-in-out, linear;
+  transition-duration: 0s; // As soon as its not hovered, it quicky goes back because transition is 0 seconds.
+  // But hover has a transition duration, so it transitions smoothly when hovered and when not hovered, it goes back quickly.
+  transition-delay: 0.5s; // Meaning it takes 0.5 seconds to start the transition.
+}
+
+.ball:hover {
+  transition-duration: 1s, 2s;
+  transform: scale(2);
+  opacity: 0.5;
+}

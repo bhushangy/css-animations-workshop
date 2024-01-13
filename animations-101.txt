@@ -1,0 +1,43 @@
+--> For cubic bezier, always keep y coordinates 0 and 1 i.e cubic(x1, 0, x2, 1)
+https://csstriggers.com/
+
+--> Stick to animating opacity and transform, color properties for better performance because they are handled by 
+the GPU and the rest are handled by the CPU.
+
+--> 60fps or 60hz as a goal - This is the monitor refresh rate meaning that the monitor can only refresh the 
+screen 60 times per second. Refresh meaning that it can only change the pixels on the screen 60 times per second.
+So 1 frame should take 16.6ms to render. If it takes more than that, then the animation will not be smooth.
+The user will feel jank.
+
+CSS Transitions
+
+--> Transition is an in between state of an element. It is the state between the initial state and the final state.
+--> So you are telling the browser to get the element from point A to point B in the smoothest way possible.
+
+--> So css lets you define how the transition should happen.
+
+--> You can transition color, opactity...
+
+--> It is not a strictly defined animation. You just give the initial state and final state and you want css to 
+smoothly transition between those states not really caring about what happens between those states.
+
+--> States here meaning the lot of states that an element can have. For example, the hover state, the active state,
+the focus state etc.
+
+--> So an element can go from not an hover state to a hover state. So you can define how that transition should happen.
+
+--> transition-property : Here you are telling the browser the css property like opacity, color etc. that you want to transition.
+
+-->  The default timing function for transition is ease. So the transition will start slow, then speed up and then slow down.
+
+--> animate the transform does not change the width and height of element because it is not part of the box model.
+The transform CSS property lets you rotate, scale, skew, or translate an element. It modifies the coordinate space 
+of the CSS visual formatting model. 
+
+
+But scaling means increasing the size right ? So how does it not change the width and height of the element ?
+It does not change the width and height of the element in the box model or the DOM. It changes the size of the element in the
+visual formatting model.
+
+--> transition: all, basically makes anything that is transitionable undrgo transition
+
