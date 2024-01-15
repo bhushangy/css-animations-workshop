@@ -39,5 +39,31 @@ But scaling means increasing the size right ? So how does it not change the widt
 It does not change the width and height of the element in the box model or the DOM. It changes the size of the element in the
 visual formatting model.
 
---> transition: all, basically makes anything that is transitionable undrgo transition
+--> transition: all, basically makes anything that is transitionable undrgo transition.
 
+
+Whenever there is a state change on an element, transition animations kicks in. ex: :hover class is added to an element,
+transition animation kicks in. :hover is removed, transition animation kicks in. So series of state changes can trigger transition animations.
+
+Keyframes
+
+--> Here, its not about transitioning between states but about defining explicit animation states on an element.
+
+--> Animations are different from transitions because they explicitly define what happens between
+state a and state b rather than just saying go between initial and final state smoothly like in transitions.
+
+--> Default timing function if you do not give is ease-in-out.
+
+--> The @keyframes CSS at-rule controls the intermediate steps in a CSS animation sequence by defining styles
+ for keyframes (or waypoints) along the animation sequence. This gives more control over the intermediate 
+ steps of the animation sequence than transitions.
+
+ Keyframes are used to define a sequence of styles to be gradually applied to an element over a specific duration.
+
+ Initial and Final States:
+
+Initial State: This is how the element looks before the animation starts. It's like the starting point or the baseline.
+Final State: This is how the element should look after the animation completes. It's like the end point or the goal.
+
+Keyframes is like a series of transitions. Each keyframe definition is like a transition. Between 2 keyframes is an initial 
+state and final state.

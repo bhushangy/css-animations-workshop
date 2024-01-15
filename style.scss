@@ -34,15 +34,26 @@ ul {
   margin-inline: auto;
   border-radius: 50%;
   background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
-  transition-property: transform, opacity;
-  transition-timing-function: ease-in-out, linear;
-  transition-duration: 0s; // As soon as its not hovered, it quicky goes back because transition is 0 seconds.
-  // But hover has a transition duration, so it transitions smoothly when hovered and when not hovered, it goes back quickly.
-  transition-delay: 0.5s; // Meaning it takes 0.5 seconds to start the transition.
+  animation-name: move-like-a-square;
+  animation-duration: 4s;
 }
 
-.ball:hover {
-  transition-duration: 1s, 2s;
-  transform: scale(2);
-  opacity: 0.5;
+@keyframes move-like-a-square {
+
+  from,
+  to {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(10vw, 0);
+  }
+
+  50% {
+    transform: translate(10vw, 10vw);
+  }
+
+  75% {
+    transform: translate(0, 10vw);
+  }
 }
