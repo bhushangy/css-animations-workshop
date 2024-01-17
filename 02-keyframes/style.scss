@@ -45,7 +45,9 @@ body {
     animation-timing-function: ease-in-out;
     animation-duration: 0.6s;
     animation-fill-mode: both;
-    // The reason why we need to have aimation-fill mode both here and not in the parent is because
+    // The reason why we need to have aimation-fill mode both here and not in the parent is because, this animation
+    // only starts after the parent animation is done. Since these are children of teh form, they will be visible
+    // along with the form. So in order to apply the opacity 0 initially only, we need to have animation-fill-mode.
   }
 }
 
