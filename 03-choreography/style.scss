@@ -8,8 +8,8 @@
   --transition-duration: 0.3s;
   --transition-easing: cubic-bezier(0.5, 0, 0.5, 1);
   --animation-duration: 0.8s;
-  --animation-stagger: 0.3s;
 }
+
 body {
   display: flex;
   justify-content: center;
@@ -31,42 +31,37 @@ body {
   will-change: transform;
 
   --color: var(--color-gray);
+
   &:focus-within {
     --color: var(--color-blue);
   }
 
-  // We also want to shake the form after all the animation is complete.
-  // For this we would need to add all the animation duration and delays.
-  // Because shake onlt runs after al the animations have run.
-  // So we need to add up all the animation duration add it to the total duration.
-
-  // Can we run two different animations on the same element at the same time without any delay added for the second animation?
-  // No, the latter animation overrides because there is conflict for the transform property.
-
-  --input-duration: var(--animation-duration);
-  --button-duration: var(--animation-duration);
-  --total-duration: calc(
-    var(--animation-duration) + var(--input-duration) + var(--button-duration) -
-      var(--animation-stagger) * 2
-  );
-
-  animation: slide-up var(--animation-duration) var(--transition-easing),
-    shake var(--animation-duration) var(--total-duration);
-
-  > .ui-input,
-  > .ui-button {
-    // Add animations here
-    animation: slide-up var(--animation-duration) both var(--transition-easing);
+  &[data-state='subscribe'] {
+    // Add an animation here
   }
 
-  > .ui-input {
-    animation-delay: calc(var(--animation-duration) - var(--animation-stagger));
+  &[data-state='success'] {
+    // Change the color and/or add an animation here
   }
-  > .ui-button {
-    animation-delay: calc(
-      var(--animation-duration) + var(--input-duration) -
-        var(--animation-stagger) * 2
-    );
+
+  &[data-state='error'] {
+    // Change the color and/or add an animation here
+  }
+
+  >.ui-input,
+  >.ui-button {
+    animation-name: slide-up;
+    animation-fill-mode: both;
+    animation-timing-function: var(--transition-easing);
+    animation-delay: calc(var(--animation-duration) / 2);
+  }
+
+  >.ui-input {
+    animation-duration: 0.5s;
+  }
+
+  >.ui-button {
+    animation-duration: 0.6s;
   }
 }
 
@@ -105,6 +100,7 @@ body {
     opacity: 0;
     transform: translateY(100%);
   }
+
   to {
     opacity: 1;
     transform: none;
@@ -112,12 +108,14 @@ body {
 }
 
 @keyframes shake {
+
   20%,
   40%,
   60%,
   80% {
     transform: translateX(1%);
   }
+
   10%,
   30%,
   50%,
@@ -125,15 +123,14 @@ body {
   90% {
     transform: translateX(-1%);
   }
+
   from,
   to {
     transform: none;
   }
 }
 
-// Choreography - Multiple html elements on the page coordinating with each other and animating themselves to
-// make it look like one single animation in the end.
-
-// Use css variables to coordinate animations between elements.
-
-// A child first checks its parent for custom variables, if it doesn't find it, it checks the root element.
+// Animations are basically state machines that could be represented as a state chart.
+// So if you build a state chart, you can use it to build animations.
+// So, in order to come up with such a state machine, we make us eof data attributes on HTML elements.
+// Based on the various states of the data attributes, we can build control our animations in css.

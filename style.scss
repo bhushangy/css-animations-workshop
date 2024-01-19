@@ -1,4 +1,4 @@
-@import "./styles/base.scss";
+@import './styles/base.scss';
 
 :root {
   --duration: 1s;
@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   padding: 5vmin;
   background-color: #f4f4f4;
 }
@@ -28,49 +28,97 @@ ul {
   margin: 1rem 0;
 }
 
+#app {
+  --bg: white;
+  transition: background-color 0.3s;
+
+  &[data-state='loading'] {
+    --bg: orange;
+  }
+
+  &[data-state='success'] {
+    --bg: green;
+  }
+
+  &[data-state='error'] {
+    --bg: red;
+  }
+
+  background-color: var(--bg);
+}
+
 .ball {
   height: 5vmin;
   width: 5vmin;
   margin-inline: auto;
   border-radius: 50%;
   background: radial-gradient(circle at bottom right, #fb2324, #fe932a);
-  animation-name: pulse;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-
-  &:hover {
-    animation-play-state: paused;
-  }
+  // &:hover {
+  //   animation-play-state: paused;
+  // }
+  --duration: 1s;
+  --stagger: 0.5s;
+  --interval: calc(var(--duration) - var(--stagger));
+  animation: move-right var(--duration) calc(var(--interval) * var(--i)) both;
 }
 
-@keyframes move-like-a-square {
-
-  from,
-  to {
-    transform: translate(0, 0);
-  }
-
-  25% {
-    transform: translate(10vw, 0);
-  }
-
-  50% {
-    transform: translate(10vw, 10vw);
-  }
-
-  75% {
-    transform: translate(0, 10vw);
-  }
-}
-
-@keyframes pulse {
-
-  from,
-  to {
+@keyframes move-right {
+  from {
     transform: none;
   }
 
-  50% {
-    transform: scale(2);
+  to {
+    transform: translateX(10vw);
   }
 }
+
+.button {
+  appearance: none;
+  background: blue;
+  color: white;
+  font-weight: bold;
+  padding: 2rem 3rem;
+  border: none;
+  transition: all 0.3s;
+  opacity: var(--transparency);
+
+  // This is dependent on a variable that is set on a parent element whose state can vary.
+  // ex: app wide state like loading, error, success. So when parent element changes state (change in data attributes),
+  // from laoding to success, the custom variable value changes, hence the button will also change its opacity.
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:active {
+    transform: translateY(20%);
+  }
+}
+
+// @keyframes move-like-a-square {
+//   from,
+//   to {
+//     transform: translate(0, 0);
+//   }
+//   25% {
+//     transform: translate(10vw, 0);
+//   }
+//   50% {
+//     transform: translate(10vw, 10vw);
+//   }
+//   75% {
+//     transform: translate(0, 10vw);
+//   }
+// }
+
+// @keyframes pulse {
+//   from,
+//   to {
+//     transform: none;
+//   }
+//   50% {
+//     transform: scale(2);
+//   }
+// }
+
+// Stagger Animation : there is an overlap between the animations. Just before the first animation ends,
+// the second animation starts.
