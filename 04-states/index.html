@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>States</title>
+    <link rel="stylesheet" href="style.scss" />
+  </head>
+  <body>
+    <form class="ui-form" data-state="subscribe">
+      <input class="ui-input" type="email" placeholder="your@email.com" />
+      <button class="ui-button" type="button">
+        <span>Subscribe</span>
+        <!-- <span>Subscribing</span>
+        <span>Success!</span>
+        <span>Error</span> -->
+      </button>
+    </form>
+  </body>
+  <script>
+    const form = document.querySelector('.ui-form');
+    const subscribeButton = document.querySelector('.ui-button');
+
+    const states = {
+      subscribing: { state: 'subscribing', buttonText: 'Subscribing...' },
+      1: { state: 'error', buttonText: 'Error' },
+      2: { state: 'success', buttonText: 'Success' },
+    };
+
+    subscribeButton.addEventListener('click', () => {
+      form.dataset.state = states.subscribing.state;
+      subscribeButton.innerHTML = states.subscribing.buttonText;
+
+      setTimeout(() => {
+        const nextState = Math.floor(Math.random() * 2) + 1;
+        form.dataset.state = states[nextState].state;
+        subscribeButton.innerHTML = states[nextState].buttonText;
+      }, 2000);
+    });
+  </script>
+</html>
