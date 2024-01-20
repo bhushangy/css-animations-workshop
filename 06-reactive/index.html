@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reactive</title>
+    <link rel="stylesheet" href="style.scss" />
+  </head>
+  <body>
+    <div class="circle"></div>
+  </body>
+  <script>
+    const circleEl = document.querySelector('.circle');
+
+    const currentPoint = { x: 0, y: 0 };
+    const targetPoint = { x: 0, y: 0 };
+
+    let lerpState = 0;
+
+    function lerp() {
+      const dx = targetPoint.x - currentPoint.x;
+      const dy = targetPoint.y - currentPoint.y;
+
+      currentPoint.x += dx * 0.1; // Move half way closer to the final target in every frame
+      currentPoint.y += dy * 0.1;
+
+      circleEl.style.setProperty('--x', currentPoint.x);
+      circleEl.style.setProperty('--y', currentPoint.y);
+
+      // if (dx < 1) {
+      //   return;
+      // }
+
+      requestAnimationFrame(lerp);
+    }
+
+    document.body.addEventListener('pointermove', (event) => {
+      targetPoint.x = event.clientX;
+      targetPoint.y = event.clientY;
+
+      if (lerpState === 0) {
+        lerp();
+      }
+    });
+  </script>
+</html>
+<!-- 
+The idea with lerp is that, instead of moving the circle exavtly to the location of the pointer in real time,
+lets move smoothly to the location of the pointer by interpolating its position every animation frame.
+
+requestAnimationFrame lets you animate certain things before the browser paints it on the screen. This ensures that 
+your animation is in sync with the screen refresh rate.
+
+ -->

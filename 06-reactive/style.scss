@@ -1,0 +1,28 @@
+@import '../styles/base.scss';
+
+.circle {
+  --x-px: calc(var(--x) * 1px);
+  --y-px: calc(var(--y) * 1px);
+  height: 10vmin;
+  width: 10vmin;
+  border-radius: 50%;
+  background-color: blue;
+  transform: translate(calc(var(--x-px) - 50%), calc(var(--y-px) - 50%));
+
+  &::after {
+    background: black;
+    color: white;
+    content: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0.5rem;
+    white-space: nowrap;
+  }
+}
+
+// Reactive animations are dependent on continuous input. They don't have a start or stop unlike transitions
+// You read continuous input and react to that in real time
+// We would definitely need some js for this. Not possible with only css
+// So you use, css variables to communicate from the js world to the css world. You use css variables to pass down this
+// info to css using element.style.setProperty('--x', '100')
